@@ -76,7 +76,7 @@ int main()
 
     std::tie(abilityScore, proficiency) = getOriginProficiencies(abilityScore, proficiency, charOrigin);
 
-    getClassProficiencies(proficiency, charClass);
+    proficiency = getClassProficiencies(proficiency, charClass);
 
     std::cout << "****************************************************************\n";
 
@@ -466,7 +466,6 @@ void printCharSheet(std::string charName, std::string charSpecies, std::string c
     int wisSavingThrow = 0;
     int intSavingThrow = 0;
     int chaSavingThrow = 0;
-    std::cout << proficiency.intelligence;
     if(proficiency.strength){strSavingThrow = strAbilityModifier + 2;}else{strSavingThrow = strAbilityModifier;};
     if(proficiency.dexterity){dexSavingThrow = dexAbilityModifier + 2;}else{dexSavingThrow = dexAbilityModifier;};
     if(proficiency.constitution){conSavingThrow = conAbilityModifier + 2;}else{conSavingThrow = conAbilityModifier;};
@@ -474,24 +473,18 @@ void printCharSheet(std::string charName, std::string charSpecies, std::string c
     if(proficiency.intelligence){intSavingThrow = intAbilityModifier + 2;}else{intSavingThrow = intAbilityModifier;};
     if(proficiency.charisma){chaSavingThrow = chaAbilityModifier + 2;}else{chaSavingThrow = chaAbilityModifier;};
 
-
-    std::cout << "----------------------------------------------------------------------\n"
-              << "| Name: " << charName << "\n"
-              << "| Background: " << charOrigin << "\n"
-              << "| Class: " << charClass << "\n"
-              << "| Species: " << charSpecies << "\n"
-              << "| Level: 1\n"
-              << std::showpos << "| Strength Ability Modifier: " << strAbilityModifier << std::noshowpos << "     | Strength Ability Score: " << abilityScore.strength << "\n"
-              << std::showpos << "| Strength Saving Throw: " << strSavingThrow << std::noshowpos << "\n"
-              << std::showpos << "| Dexterity Ability Modifier: " << dexAbilityModifier << std::noshowpos << "    | Dexterity Ability Score: " << abilityScore.dexterity << "\n"
-              << std::showpos << "| Dexteriy Saving Throw: " << dexSavingThrow << std::noshowpos << "\n"
-              << std::showpos << "| Constitution Ability Modifier: " << conAbilityModifier << std::noshowpos << " | Consititution Ability Score: " << abilityScore.constitution << "\n"
-              << std::showpos << "| Constitution Saving Throw: " << conSavingThrow << std::noshowpos << "\n"
-              << std::showpos << "| Wisdom Ability Modifier: " << wisAbilityModifier << std::noshowpos << "       | Wisdom Ability Score: " << abilityScore.wisdom << "\n"
-              << std::showpos << "| Wisdom Saving Throw: " << wisSavingThrow << std::noshowpos << "\n"
-              << std::showpos << "| Intelligence Ability Modifier: " << intAbilityModifier << std::noshowpos << " | Intelligence Ability Score: " << abilityScore.intelligence << "\n"
-              << std::showpos << "| Intelligence Saving Throw: " << intSavingThrow << std::noshowpos << "\n"
-              << std::showpos << "| Charisma Ability Modifier: " << chaAbilityModifier << std::noshowpos << "     | Charisma Ability Score: " << abilityScore.charisma << "\n" 
-              << std::showpos << "| Charisma Saving Throw: " << chaSavingThrow << std::noshowpos << "\n"
-              << "----------------------------------------------------------------------";
-}
+    std::cout << "------------------------------------------------------------\n"
+              << "| " << charName << "\n"
+              << "| CHARACTER NAME\n"
+              << "------------------------------------------------------------\n"
+              << "| " << charOrigin << "          " << charClass << "\n"
+              << "| BACKGROUND         CLASS\n"
+              << "------------------------------------------------------------\n"
+              << "| " << charSpecies << "\n"
+              << "| SPECIES         SUBCLASS\n"
+              << "------------------------------------------------------------\n"
+              << "| PROFICIENCY BONUS |     | INTELLIGENCE |\n"
+              << "| +2                |     | " << std::showpos << intAbilityModifier << std::noshowpos << abilityScore.intelligence << "\n"
+              << "---------------------     | Modifier     Score"
+              << "------------------------------------------------------------\n"
+              << "|     STRENGTH      |     | "; if(proficiency.intelligence){std::cout << "[x] ";}else{std::cout << "[ ] ";} std::cout << strSavingThrow << " Saving Throw";
